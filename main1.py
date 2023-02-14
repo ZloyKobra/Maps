@@ -4,7 +4,7 @@ import sys
 import requests
 from PyQt5 import uic
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QLineEdit
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QLineEdit, QRadioButton
 
 SCREEN_SIZE = [600, 450]
 
@@ -13,7 +13,11 @@ class Example(QMainWindow, QApplication):
     pushButton: QPushButton
     lang: QLineEdit
     lat: QLineEdit
-    map: QLabel
+    image: QLabel
+    map: QRadioButton
+    satellite: QRadioButton
+    gybrid: QRadioButton
+
 
     def __init__(self):
         super().__init__()
@@ -34,7 +38,7 @@ class Example(QMainWindow, QApplication):
         params = {
             "ll": ",".join([lon, lat]),
             "spn": ",".join([delta, delta]),
-            "l": "map"
+            "l": self.get_map_view()
         }
         response = requests.get(api_server, params=params)
 
@@ -50,7 +54,14 @@ class Example(QMainWindow, QApplication):
 
     def showMap(self):
         self.pixmap = QPixmap(self.map_file)
-        self.map.setPixmap(self.pixmap)
+        self.image.setPixmap(self.pixmap)
+
+    def get_map_view(self):
+        if self.map.isChecked():
+            return "map"
+        elif self.satellite.isChecked():
+            return "sat"
+        return "sat,skl"
 
 
     def closeEvent(self, event):
