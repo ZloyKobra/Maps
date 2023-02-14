@@ -13,6 +13,7 @@ class Example(QMainWindow, QApplication):
     pushButton: QPushButton
     lang: QLineEdit
     lat: QLineEdit
+    map: QLabel
 
     def __init__(self):
         super().__init__()
@@ -49,10 +50,7 @@ class Example(QMainWindow, QApplication):
 
     def showMap(self):
         self.pixmap = QPixmap(self.map_file)
-        self.image = QLabel(self)
-        self.image.move(150, 150)
-        self.image.resize(600, 450)
-        self.image.setPixmap(self.pixmap)
+        self.map.setPixmap(self.pixmap)
 
 
     def closeEvent(self, event):
