@@ -39,9 +39,9 @@ class Example(QWidget):
         self.image.setPixmap(self.pixmap)
 
     def keyPressEvent(self, event: QtGui.QKeyEvent) -> None:
-        if event.key() == 16777238:
+        if event.key() == 16777238 and 17 >= self.z >= 0:
             self.z += 1
-        elif event.key() == 16777239:
+        elif event.key() == 16777239 and 17 >= self.z >= 0:
             self.z -= 1
         self.getImage()
 
