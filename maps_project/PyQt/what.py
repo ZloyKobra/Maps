@@ -11,11 +11,13 @@ SCREEN_SIZE = [600, 450]
 class Example(QWidget):
     def __init__(self):
         super().__init__()
+        self.ll = [37.530887, 55.703118]
+        self.spn = [0.002, 0.002]
         self.getImage()
         self.initUI()
 
     def getImage(self):
-        map_request = "http://static-maps.yandex.ru/1.x/?ll=37.530887,55.703118&spn=0.002,0.002&l=map"
+        map_request = f"http://static-maps.yandex.ru/1.x/?ll={self.ll[0]},{self.ll[1]}&spn={self.spn[0]},{self.spn[1]}&l=map"
         response = requests.get(map_request)
 
         if not response:
